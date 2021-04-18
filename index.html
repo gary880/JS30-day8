@@ -23,7 +23,6 @@
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.width = window.innerHeight;
-  
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     
@@ -32,22 +31,21 @@
     let lastY = 0;
     let hue = 0;
     let line = true ;
-
     function draw(e){
-        if(!isDrawing) return;
-        console.log(e);
-        ctx.strokeStyle = `hsl(${hue},100%, 50%)`;
-        ctx.beginPath();
-        [lastX , lastY] = [e.offsetX , e.offsetY];
-        ctx.moveTo(lastX,lastY);
-        ctx.lineTo(e.offsetX,e.offsetY);
-        ctx.stroke();
+        if(!isDrawing) return; //判斷isDrawing 是的話就作圖 反則return
+        ctx.strokeStyle = `hsl(${hue},100%, 50%)`;//利用hsl做出變色效果
+        ctx.beginPath();//繪圖起始路徑
+        [lastX , lastY] = [e.offsetX , e.offsetY]; //將end point放入 begin point
+        ctx.moveTo(lastX,lastY); //移動到(x,y)
+        ctx.lineTo(e.offsetX,e.offsetY);//將(x1,y1)(x2,y2)用線連接
+        ctx.stroke();//繪圖
        hue ++ ;
        
-       if(hue >= 360){
+
+       if(hue >= 360){ //hue每360會循環顏色
            hue = 0;
        }
-       if(ctx.lineWidth >=100 || ctx.lineWidth <=1){
+       if(ctx.lineWidth >=50 || ctx.lineWidth <=1){  //畫筆寬度變化
            line = !line;
        }
        if(line){
